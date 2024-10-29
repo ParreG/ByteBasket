@@ -12,10 +12,12 @@ namespace ByteBasket
 
         public ExpressDelivery(Guid deliveryId, string address, DateTime deliveryDate, string status) : base(deliveryId, address, deliveryDate, status)
         {
+
         }
 
         public override void Handledelivery()
         {
+            Console.WriteLine();
             Console.WriteLine($"Din express leverans ID: {Guid.NewGuid()}");
             Console.WriteLine($"levarans hanteras. uppskattat leveranstid är: {DateTime.Now.AddDays(4)}");
         }

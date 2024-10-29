@@ -4,65 +4,93 @@
     {
         static void Main(string[] args)
         {
-            Customer customer = new Customer("Anna Larsson", "LinneaGatan 24, 181123 Stockholm", "073423123");
-            
+            Customer customer0 = new Customer("Anna Larsson", "LinneaGatan 24, 181123 Stockholm", "073423123");
+            Customer customer1 = new Customer("Erik Svensson", "Björkgatan 12, 12345 Göteborg", "0709876543");
+            Customer customer2 = new Customer("Maria Johansson", "Tallvägen 5, 45678 Malmö", "0734567890");
+            Customer customer3 = new Customer("Lars Olsson", "Eklundavägen 8, 98765 Uppsala", "0765432109");
 
-            List<Pruduct> pruducts = new List<Pruduct>
+
+
+            List<Pruduct> products = new List<Pruduct>
             {
                 new Pruduct("Laptop", 1, 8999.99),
                 new Pruduct("Mus", 2, 299.99),
-                new Pruduct("Tangentbord", 1, 699.99)
+                new Pruduct("Tangentbord", 1, 699.99),
+                new Pruduct("Skärm", 1, 2499.99),
+                new Pruduct("Hörlurar", 1, 499.99),
+                new Pruduct("Webbkamera", 1, 799.99),
+                new Pruduct("Extern Hårddisk", 1, 1199.99),
+                new Pruduct("USB-kabel", 3, 49.99),
+                new Pruduct("Skrivare", 1, 1499.99),
+                new Pruduct("Router", 1, 999.99),
+                new Pruduct("Mobilhållare", 2, 199.99),
+                new Pruduct("Musmatta", 1, 99.99),
+                new Pruduct("Trådlös laddare", 1, 299.99)
+            };
+
+            
+            List<Pruduct> products1 = new List<Pruduct>
+            {
+                new Pruduct("Smartphone", 1, 6999.99),
+                new Pruduct("Tablet", 1, 4999.99),
+                new Pruduct("Bärbar högtalare", 1, 1299.99),
+                new Pruduct("Smartwatch", 1, 2499.99),
+                new Pruduct("VR-headset", 1, 3499.99)
+            };
+
+            
+            List<Pruduct> products2 = new List<Pruduct>
+            {
+                new Pruduct("Spelkontroll", 2, 599.99),
+                new Pruduct("Gamingstol", 1, 1999.99),
+                new Pruduct("Spelkonsol", 1, 3999.99),
+                new Pruduct("Grafikkort", 1, 4999.99),
+                new Pruduct("Mikrofon", 1, 799.99)
+            };
+
+            
+            List<Pruduct> products3 = new List<Pruduct>
+            {
+                new Pruduct("Kamera", 1, 3999.99),
+                new Pruduct("Stativ", 1, 999.99),
+                new Pruduct("Objektiv", 1, 2999.99),
+                new Pruduct("Fotobok", 1, 199.99),
+                new Pruduct("Blixt", 1, 1499.99)
             };
 
 
-            Order order = new Order(Guid.NewGuid(), pruducts, DateTime.Now);
-            order.Printorder();
-            Console.WriteLine();
+            List<Order> orders = new List<Order>
+            {
+                new Order(Guid.NewGuid(), products, customer0, DateTime.Now),
+                new Order(Guid.NewGuid(), products1, customer1, DateTime.Now),
+                new Order(Guid.NewGuid(), products2, customer2, DateTime.Now),
+                new Order(Guid.NewGuid(), products3, customer3, DateTime.Now)
+            };
 
-            Thread.Sleep(3000);
 
-            DeliveryOptions();
+
+            foreach (var order in orders)
+            {
+                order.Printorder();
+                Console.WriteLine();
+                Thread.Sleep(new Random().Next(400, 1000));
+                Order.DeliveryOptions();
+            }
 
             
 
 
 
-        }
 
-        public static void DeliveryOptions()
-        {
-            string[] deliveryOptions = new string[2]
-            {
-                "1. Standard Leverans (8 dagar)",
-                "2. Expressleverans (2 dagar)"
-            };
 
-            Console.WriteLine("Välj leverans typ: ");
-            foreach (var item in deliveryOptions)
-            {
-                Console.WriteLine(item);
-            }
-            int choice;
-            Console.Write("Ditt val: ");
 
-            
-            while (!int.TryParse(Console.ReadLine(), out choice) || (choice != 1 && choice != 2))
-            {
-                Console.WriteLine("Ogiltigt val. Ange 1 för Standard Leverans eller 2 för Expressleverans.");
-                Console.Write("Ditt val: ");
-            }
 
-            Delivery delivery;
-            if (choice == 1)
-            {
-                delivery = new StandardDelivery(Guid.NewGuid(), "Jarlavägen 34", DateTime.Now, "Pågående");
-                delivery.Handledelivery();
-            }
-            else if (choice == 2)
-            {
-                delivery = new ExpressDelivery(Guid.NewGuid(), "Jarlavägen 34", DateTime.Now.AddDays(2), "Pågående");
-                delivery.Handledelivery();
-            }
+
+
+
+
+
+
         }
     }
 }

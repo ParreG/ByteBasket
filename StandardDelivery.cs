@@ -14,6 +14,7 @@ namespace ByteBasket
 
         public override void Handledelivery()
         {
+            Console.WriteLine();
             Console.WriteLine($"Din express leverans ID: {Guid.NewGuid()}");
             Console.WriteLine($"levarans hanteras. uppskattat leveranstid är: {DateTime.Now.AddDays(8)}");
         }
